@@ -1,3 +1,9 @@
+# Optimized by ci-cost (https://github.com/mariotavarez/ci-cost)
+# Applied 2 optimizations:
+# - [MEDIUM] Add concurrency group to "test.yml"
+# - [LOW] Explicitly set fail-fast for large matrix job "test-sharded" (8 combinations)
+# Estimated savings: ~4 min/run
+#
 name: Test
 
 on:
@@ -11,6 +17,10 @@ on:
     types: [checks_requested]
   workflow_dispatch:
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 env:
   _GITHUB_ACTION_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/attempts/${{ github.run_attempt }}
 
