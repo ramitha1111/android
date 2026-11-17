@@ -21,7 +21,7 @@ jobs:
     permissions:
       packages: read
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         include:
           - group: static-analysis
